@@ -10,6 +10,7 @@ import {
 } from "@clerk/nextjs";
 import { Tektur } from "next/font/google";
 import Searchbar from "./Searchbar";
+import { Plus } from "lucide-react";
 
 const tektur = Tektur({
   subsets: ["latin"],
@@ -38,6 +39,12 @@ export default function Navbar() {
 
         <div className="flex items-center space-x-4">
           <SignedIn>
+            <Link href="/post">
+              <Button variant="outline" className="flex items-center">
+                <Plus />
+                <span>Post</span>
+              </Button>
+            </Link>
             <UserButton />
           </SignedIn>
 

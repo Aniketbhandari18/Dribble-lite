@@ -39,7 +39,7 @@ export default function Navbar() {
 
         <div className="flex items-center space-x-4">
           <SignedIn>
-            <Link href="/post">
+            <Link href="/post/new">
               <Button variant="outline" className="flex items-center">
                 <Plus />
                 <span>Post</span>

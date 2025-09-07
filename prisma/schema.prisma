@@ -43,7 +43,7 @@ model Post {
   updatedAt     DateTime @updatedAt
   
   likedBy     Like[]
-  ViewedBy    View[]
+  viewedBy    View[]
   commentedBy Comment[]
 
   createdBy User @relation(fields: [createdById], references: [id])

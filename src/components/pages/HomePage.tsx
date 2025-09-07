@@ -1,7 +1,9 @@
+import PostList from "../PostList";
+
 export default function HomePage() {
   return (
-    <div className="pt-6">
-      <main className="flex flex-col items-center justify-center space-y-4">
+    <div className="pt-6 p-6">
+      <main className="flex flex-col items-center justify-center space-y-4 mb-14">
         <h1 className="text-2xl xs:text-3xl sm:text-5xl font-sans font-bold flex flex-col items-center justify-center">
           <p>Discover the World's</p>
           <p>Top Designs</p>
@@ -11,6 +13,8 @@ export default function HomePage() {
           to take on your next project.
         </p>
       </main>
+
+      <PostList />
     </div>
   );
 }

@@ -5,13 +5,28 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Post, User } from "@prisma/client";
 import CommentSection from "../CommentSection";
+import { useState } from "react";
+import { toggleLike } from "@/actions/postActions/toggleLike";
 
 type Props = {
   post: Post;
   user: User | null;
+  initialLikedStatus: boolean;
 };
 
-export default function PostPage({ post, user }: Props) {
+export default function PostPage({ post, user, initialLikedStatus }: Props) {
+  const [liked, setLiked] = useState(initialLikedStatus);
+
+  const handleToggleLike = async () => {
+    const newLiked = !liked;
+    setLiked(newLiked);
+    const result = await toggleLike(post.id);
+
+    if (!result.success) {
+      setLiked(!newLiked);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background m-18 mt-15">
       {/* Author Details */}
@@ -24,8 +39,11 @@ export default function PostPage({ post, user }: Props) {
           <p className="font-semibold">Aniket Bhandari</p>
         </div>
         <div>
-          <button className="bg-gray-200 h-8 w-8 flex justify-center items-center rounded-full cursor-pointer">
-            <Heart size={16} />
+          <button
+            onClick={handleToggleLike}
+            className="bg-gray-200 h-8 w-8 flex justify-center items-center rounded-full cursor-pointer"
+          >
+            <Heart size={16} fill={liked ? "black" : "none"} />
           </button>
         </div>
       </div>

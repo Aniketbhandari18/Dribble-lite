@@ -24,11 +24,19 @@ export default async function Page({
 
   const post = await prisma.post.findUnique({
     where: { id },
+    include: {
+      likedBy: {
+        where: { likedById: user?.id },
+        select: { id: true },
+      },
+    },
   });
 
   if (!post) {
     return notFound();
   }
 
-  return <PostPage post={post} user={user} />;
+  const hasLiked = post.likedBy.length > 0;
+
+  return <PostPage post={post} user={user} initialLikedStatus={hasLiked} />;
 }

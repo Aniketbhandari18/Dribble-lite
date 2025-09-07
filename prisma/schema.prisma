@@ -25,20 +25,26 @@ model User {
 
   posts Post[]
   likes Like[]
+  views View[]
+  comments Comment[]
 }
 
 model Post {
-  id          String   @id @default(cuid())
-  createdById String
-  imageUrl    String
-  title       String
-  description String?
-  tags        Tag[] @default([])
-  likesCount  Int      @default(0)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id            String   @id @default(cuid())
+  createdById   String
+  imageUrl      String
+  title         String
+  description   String?
+  tags          Tag[]    @default([])
+  likesCount    Int      @default(0)
+  viewCount     Int      @default(0)
+  commentsCount Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
   
-  likedBy Like[]
+  likedBy     Like[]
+  ViewedBy    View[]
+  commentedBy Comment[]
 
   createdBy User @relation(fields: [createdById], references: [id])
 
@@ -56,6 +62,31 @@ model Like {
   post    Post @relation(fields: [postId], references: [id])
 
   @@unique([likedById, postId])
+}
+
+model View {
+  id         String   @id @default(cuid())
+  viewedById String
+  postId     String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  viewedBy User @relation(fields: [viewedById], references: [id])
+  post     Post @relation(fields: [postId], references: [id])
+
+  @@unique([viewedById, postId])
+}
+
+model Comment {
+  id            String   @id @default(cuid())
+  commentedById String
+  postId        String
+  content       String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  commentedBy User @relation(fields: [commentedById], references: [id])
+  post        Post @relation(fields: [postId], references: [id])
 }
 
 enum Tag {

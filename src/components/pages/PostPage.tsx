@@ -28,7 +28,7 @@ export default function PostPage({ post, user, initialLikedStatus }: Props) {
   };
 
   return (
-    <div className="min-h-screen bg-background m-18 mt-15">
+    <div className="min-h-screen bg-background m-4 sm:m-18 sm:mt-15">
       {/* Author Details */}
       <div className="flex justify-between items-center mb-6">
         <div className="flex gap-2 items-center">
@@ -48,7 +48,7 @@ export default function PostPage({ post, user, initialLikedStatus }: Props) {
         </div>
       </div>
       {/* Hero Image */}
-      <div className="relative w-[100] aspect-[4/3] overflow-hidden">
+      <div className="relative w-full aspect-[4/3] overflow-hidden">
         <img
           src={post.imageUrl}
           alt="Mountain lake at sunset"

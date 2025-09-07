@@ -1,6 +1,6 @@
 import PostForm from "../PostForm";
 
-export default function PostPage() {
+export default function CreatePostPage() {
   return (
     <PostForm />
   )
